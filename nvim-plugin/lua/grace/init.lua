@@ -2,13 +2,14 @@ local curl = require('plenary.curl')
 local popup = require('plenary.popup')
 
 Grace_window_id = nil
+Indexer_URL = 'https://ckgjsixa23.execute-api.us-west-2.amazonaws.com/production/indexer'
 
 local GraceModule = {}
 
 function GraceModule.get_issues()
     local line = vim.api.nvim_get_current_line()
 
-    local issues_response = curl.post('http://localhost:8080', {
+    local issues_response = curl.post(Indexer_URL, {
         timeout = 1000,
         body = {
             line,
