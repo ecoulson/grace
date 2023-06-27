@@ -10,7 +10,7 @@ function GraceModule.get_issues()
     local line = vim.api.nvim_get_current_line()
 
     local issues_response = curl.post(Indexer_URL, {
-        timeout = 1000,
+        timeout = 2000,
         body = {
             line,
         }
