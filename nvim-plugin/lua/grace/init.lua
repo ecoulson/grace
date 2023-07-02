@@ -2,7 +2,8 @@ local curl = require('plenary.curl')
 local popup = require('plenary.popup')
 
 Grace_window_id = nil
-Indexer_URL = 'https://ckgjsixa23.execute-api.us-west-2.amazonaws.com/production/indexer'
+Indexer_URL = 'https://grace-index.fly.dev'
+-- Indexer_URL = 'http://localhost:8000'
 
 local GraceModule = {}
 
@@ -10,10 +11,10 @@ function GraceModule.get_issues()
     local line = vim.api.nvim_get_current_line()
 
     local issues_response = curl.post(Indexer_URL, {
-        timeout = 2000,
-        body = {
-            line,
-        }
+        timeout = 20000,
+        body = vim.fn.json_encode({
+            line = line,
+        })
     })
 
     return issues_response
@@ -33,6 +34,11 @@ function GraceModule.display_issues()
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
     })
     local close_command = "lua require('grace').close()"
+    local urls = {}
+
+    for i, value in pairs(payload) do
+        urls[i] = value.url
+    end
 
     Grace_window_id = window_id
 
@@ -41,7 +47,7 @@ function GraceModule.display_issues()
     vim.api.nvim_buf_set_option(buffer, "filetype", "grace")
     vim.api.nvim_buf_set_option(buffer, "buftype", "nowrite")
     vim.api.nvim_buf_set_option(buffer, "bufhidden", "delete")
-    vim.api.nvim_buf_set_lines(buffer, 0, #payload, false, payload)
+    vim.api.nvim_buf_set_lines(buffer, 0, #payload, false, urls)
     vim.api.nvim_win_set_option(window.border.win_id, "winhl", "Normal:GraceWindow")
     vim.api.nvim_buf_set_keymap(buffer, "n", "q", string.format("<Cmd>%s<CR>", close_command), {
         silent = true

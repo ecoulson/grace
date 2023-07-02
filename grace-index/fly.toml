@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for grace-index on 2023-06-27T13:11:38-07:00
+# fly.toml app configuration file generated for grace-index on 2023-06-30T13:17:58-07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = "grace-index"
-primary_region = "lax"
+primary_region = "sea"
 
 [http_service]
   internal_port = 8000
