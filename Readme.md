@@ -1,4 +1,4 @@
-## Grace
+### Grace
 
 Essentially the mission of this project is to provide a better search experience for developers. I 
 believe that a common problem that many developers face is having to context switch between writing 
@@ -41,6 +41,14 @@ the index for these function calls
 - To start this project will only work for the Lua programming language and focus on nvim plugin
 development.
 
+## Images
+![Current state of Grace's UI](./images/grace.png)
+
+## Progress
+Currently the nvim plugin is working and an API exists and can search for code, however, the
+current search algorithm does not produce great results so at the moment the tool is quite
+unhelpful. To reach the MVP of this project some work needs to be done finding the simplest way
+to improve the search so that I can test my hypothesis.
 
 ## Why Lua and nvim?
 
@@ -50,3 +58,7 @@ Many people turn towards videos and articles to follow when attempting to build 
 that Grace could help prevent people from entering "Tutorial Hell" by providing help in editor,
 which encourage developers to experiment and iterate within their editor instead of constantly
 reading half baked articles. 
+
+## Example UI
+
+Here is an example of the UI in nvim.
